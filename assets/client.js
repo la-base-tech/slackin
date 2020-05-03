@@ -73,21 +73,6 @@ function invite(chan, coc, email, gcaptcha_response_value, fn) {
 // use dom element for better cross browser compatibility
 var url = document.createElement('a')
 url.href = window.location
-// realtime updates
-var socket = io({ path: data.path + 'socket.io' })
-socket.on('data', function (users) {
-  for (var i in users) {
-    if (Object.prototype.hasOwnProperty.call(users, i)) {
-      update(i, users[i])
-    }
-  }
-})
-socket.on('total', function (n) {
-  update('total', n)
-})
-socket.on('active', function (n) {
-  update('active', n)
-})
 
 function update(val, n) {
   var el = document.querySelector('.' + val)

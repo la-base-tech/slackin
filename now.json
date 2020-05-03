@@ -1,18 +1,12 @@
 {
   "version": 2,
-  "env": {
-    "SLACK_SUBDOMAIN": "@slack-subdomain",
-    "SLACK_API_TOKEN": "@slack-api-token"
-  },
-  "github": {
-    "silent": true
-  },
   "builds": [
     {
       "src": "package.json",
       "use": "@now/static-build",
       "config": { "distDir": "assets" }
     },
+    { "src": "assets/**", "use": "@now/static" },
     {
       "src": "bin/slackin",
       "use": "@now/node-server"
@@ -21,6 +15,7 @@
   "routes": [
     { "src": "/assets/(.*)", "dest": "$1" },
     { "src": "/slackin.js", "dest": "badge.js" },
+    { "src": "/favicon.ico", "dest": "favicon.ico" },
     { "src": "/(.*)", "dest": "bin/slackin" }
   ]
 }
